@@ -1,21 +1,24 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Search from 'react-icons/lib/fa/search';
 
-import {
-    SearchBox,
-    Container1,
-    IconContainer,
-    Input,
-} from './search-field.styled';
+import { Main, Container, IconContainer, Input } from './search-field.styled';
 
-export default props => (
-    <SearchBox>
-        <Container1>
+const SearchField = props => (
+    <Main>
+        <Container>
             <IconContainer>
                 <Search />
             </IconContainer>
             <Input type="search" id="search" {...props} />
-        </Container1>
-    </SearchBox>
+        </Container>
+    </Main>
 );
+
+SearchField.propTypes = {
+    placeholder: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+};
+
+export default SearchField;

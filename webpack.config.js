@@ -1,5 +1,4 @@
 const path = require('path');
-const webpack = require('webpack');
 
 module.exports = {
     context: path.resolve(__dirname, './'),
@@ -27,9 +26,9 @@ module.exports = {
     },
     resolve: {
         alias: {
-            components: 'app/components',
-            utils: 'utils',
             app: 'app',
+            utils: 'utils',
+            components: 'app/components',
         },
         extensions: ['.js', '.jsx'],
         modules: [path.join(__dirname, './'), 'node_modules'],

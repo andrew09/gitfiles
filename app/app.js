@@ -4,15 +4,8 @@ import { UserSearchInput } from 'components/user-search-input';
 
 import { Main } from './app.styled.js';
 
-export default class App extends React.Component {
-    render() {
-        return (
-            <Main>
-                <UserSearchInput
-                    items={['apple', 'orange', 'carrot']}
-                    onChange={selectedItem => console.log(selectedItem)}
-                />
-            </Main>
-        );
-    }
-}
+export default () => (
+    <Main>
+        <UserSearchInput onChange={console.log} />
+    </Main>
+);

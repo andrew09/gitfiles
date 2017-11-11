@@ -2,15 +2,16 @@ import styled from 'styled-components';
 
 import colors from 'utils/colors';
 
-export const SearchBox = styled.div`
+export const Main = styled.div`
     position: relative;
     top: 50px;
     margin: 0px auto;
     width: 800px;
     height: 50px;
+    z-index: 1;
 `;
 
-export const Container1 = styled.div`
+export const Container = styled.div`
     vertical-align: middle;
     white-space: nowrap;
     position: relative;
@@ -36,6 +37,7 @@ export const Input = styled.input`
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
+    box-shadow: 0px 4px 8px 0px;
 
     &::-webkit-input-placeholder {
         color: ${colors.grey.medium};

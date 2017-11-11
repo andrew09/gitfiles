@@ -1,18 +1,23 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Subject } from 'rxjs';
 import Downshift from 'downshift';
-import styled from 'styled-components';
+import { fromJS, List } from 'immutable';
 
 import { SearchField } from 'components/search-field';
 import { Main, TagsContainer, Tag } from './user-search-input.styled';
 
 export default class UserSearchInput extends React.Component {
+    static propTypes = {
+        onChange: PropTypes.func.isRequired,
+    };
+
     constructor(props) {
         super(props);
 
         this.state = {
-            users: [],
+            users: new List(),
         };
 
         this.onFieldChange = this.onFieldChange.bind(this);
@@ -35,28 +40,52 @@ export default class UserSearchInput extends React.Component {
 
     async getUsers(e) {
         const search = e.target.value;
+
+        if (!search) return;
+
         const response = await fetch(
             `https://api.github.com/search/users?q=${search}`
         );
         const users = await response.json();
 
-        this.setState({ users: users.items });
+        this.setState({ users: fromJS(users.items) });
+    }
+
+    getUserTags(getItemProps, inputValue, highlightedIndex) {
+        const { users } = this.state;
+
+        return users
+            .filter(
+                user =>
+                    !inputValue ||
+                    user
+                        .get('login')
+                        .toLowerCase()
+                        .includes(inputValue.toLowerCase())
+            )
+            .map((user, index) => (
+                <Tag
+                    {...getItemProps({ item: user.get('login') })}
+                    key={user.get('login')}
+                    index={index}
+                    highlightedIndex={highlightedIndex}
+                >
+                    {user.get('login')}
+                </Tag>
+            ));
     }
 
     render() {
         const { onChange } = this.props;
-        const { users } = this.state;
-        const userNames = users.map(user => user.login);
 
         return (
             <Downshift onChange={onChange}>
                 {({
                     getInputProps,
                     getRootProps,
-                    getItemProps,
                     isOpen,
+                    getItemProps,
                     inputValue,
-                    selectedItem,
                     highlightedIndex,
                 }) => (
                     <Main {...getRootProps({ refKey: 'innerRef' })}>
@@ -66,30 +95,15 @@ export default class UserSearchInput extends React.Component {
                                 onChange: this.onFieldChange,
                             })}
                         />
-                        {isOpen ? (
+                        {isOpen && (
                             <TagsContainer>
-                                {userNames
-                                    .filter(
-                                        i =>
-                                            !inputValue ||
-                                            i
-                                                .toLowerCase()
-                                                .includes(
-                                                    inputValue.toLowerCase()
-                                                )
-                                    )
-                                    .map((item, index) => (
-                                        <Tag
-                                            {...getItemProps({ item })}
-                                            key={item}
-                                            index={index}
-                                            highlightedIndex={highlightedIndex}
-                                        >
-                                            {item}
-                                        </Tag>
-                                    ))}
+                                {this.getUserTags(
+                                    getItemProps,
+                                    inputValue,
+                                    highlightedIndex
+                                )}
                             </TagsContainer>
-                        ) : null}
+                        )}
                     </Main>
                 )}
             </Downshift>
