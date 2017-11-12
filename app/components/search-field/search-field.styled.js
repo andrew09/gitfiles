@@ -37,7 +37,7 @@ export const Input = styled.input`
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
-    box-shadow: 0px 4px 8px 0px;
+    box-shadow: 0px 3px 15px ${colors.grey.light};
 
     &::-webkit-input-placeholder {
         color: ${colors.grey.medium};

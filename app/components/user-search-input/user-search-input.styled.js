@@ -9,9 +9,11 @@ export const Main = styled.div`
 `;
 export const TagsContainer = styled.div`
     width: 800px;
-    margin: 0 auto;
-    position: relative;
-    top: 50px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    position: absolute;
+    top: 100px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
@@ -20,7 +22,7 @@ export const TagsContainer = styled.div`
 `;
 export const Tag = styled.div`
     background-color: ${({ highlightedIndex, index }) =>
-        highlightedIndex === index ? colors.grey.light : colors.white};
+        highlightedIndex === index ? colors.offWhite : colors.white};
     height: 78px;
     border-bottom: 1px solid ${colors.grey.ultraLight};
     cursor: pointer;
