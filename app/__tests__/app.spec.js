@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { shallow, render } from 'enzyme';
+import { mount } from 'enzyme';
 import { expect } from 'chai';
 
 import App from '../app';
@@ -20,14 +20,14 @@ describe('app', () => {
 
         it('should render', () => {
             // Arrange
-            const wrapper = render(app);
+            const wrapper = mount(app);
             // Assert
             expect(wrapper.html()).to.not.be.null;
         });
 
         it('should render a Main styled component', () => {
             // Arrange
-            const wrapper = shallow(app);
+            const wrapper = mount(app);
 
             // Assert
             expect(wrapper.find(Main).length).to.equal(1);
@@ -35,18 +35,27 @@ describe('app', () => {
 
         it('should render a UserSearchInput component', () => {
             // Arrange
-            const wrapper = shallow(app);
+            const wrapper = mount(app);
 
             // Assert
             expect(wrapper.find(UserSearchInput).length).to.equal(1);
         });
 
-        it('should render a Profile component', () => {
+        it('should render a Profile component if a User is selected', () => {
             // Arrange
-            const wrapper = shallow(app);
+            const wrapper = mount(app);
+            wrapper.setState({ userName: 'andrew09' });
 
             // Assert
             expect(wrapper.find(Profile).length).to.be.equal(1);
+        });
+
+        it('should not render a Profile component is a User is not selected', () => {
+            // Arrange
+            const wrapper = mount(app);
+
+            // Assert
+            expect(wrapper.find(Profile).length).to.be.equal(0);
         });
     });
 });

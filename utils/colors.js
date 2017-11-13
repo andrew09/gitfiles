@@ -4,7 +4,10 @@ export default {
     grey: {
         medium: '#757575',
         light: '#B2B2B2',
-        ultraLight: '#F0F0F0',
+        ultraLight: '#e9e8e6',
     },
-    blue: '#2196f3',
+    blue: {
+        medium: '#61a4d8',
+        dark: '#5194c8',
+    },
 };

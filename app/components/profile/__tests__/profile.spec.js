@@ -1,12 +1,11 @@
 import React from 'react';
 
-import { render, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import { expect } from 'chai';
-import { Map } from 'immutable';
 
 import Profile from '../profile';
 
-import { Main } from '../profile.styled';
+import { Main, Avatar } from '../profile.styled';
 
 describe('profile', () => {
     it('should be a function', () => {
@@ -15,11 +14,11 @@ describe('profile', () => {
     });
 
     describe('rendering', () => {
-        const profile = <Profile user={new Map()} />;
+        const profile = <Profile userName="andrew09" />;
 
         it('should render', () => {
             // Arrange
-            const wrapper = render(profile);
+            const wrapper = mount(profile);
 
             // Assert
             expect(wrapper.html()).to.not.be.null;
@@ -27,10 +26,18 @@ describe('profile', () => {
 
         it('should render a Main styled component', () => {
             // Arrange
-            const wrapper = shallow(profile);
+            const wrapper = mount(profile);
 
             // Assert
             expect(wrapper.find(Main).length).to.equal(1);
+        });
+
+        it('should render an Avatar styled component', () => {
+            // Arrange
+            const wrapper = mount(profile);
+
+            // Assert
+            expect(wrapper.find(Avatar).length).to.equal(1);
         });
     });
 });

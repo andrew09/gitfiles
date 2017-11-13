@@ -33,7 +33,6 @@ export const Input = styled.input`
     float: left;
     color: ${colors.grey.medium};
     padding-left: 45px;
-    font-family: 'Montserrat', sans-serif;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
@@ -53,10 +52,10 @@ export const Input = styled.input`
     }
     &:focus {
         outline: none;
-        border: 2px solid ${colors.blue};
+        border: 2px solid ${colors.blue.medium};
     }
     &:active {
         outline: none;
-        border: 2px solid ${colors.blue};
+        border: 2px solid ${colors.blue.medium};
     }
 `;

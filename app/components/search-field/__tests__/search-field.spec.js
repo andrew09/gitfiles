@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { shallow, render } from 'enzyme';
+import { mount } from 'enzyme';
 import { expect } from 'chai';
 import { spy } from 'sinon';
 import Search from 'react-icons/lib/fa/search';
@@ -21,7 +21,7 @@ describe('SearchField', () => {
 
         it('should render', () => {
             // Arrange
-            const wrapper = render(searchField);
+            const wrapper = mount(searchField);
 
             // Assert
             expect(wrapper.html()).to.not.be.null;
@@ -29,7 +29,7 @@ describe('SearchField', () => {
 
         it('should render a Main styled component', () => {
             // Arrange
-            const wrapper = shallow(searchField);
+            const wrapper = mount(searchField);
 
             // Assert
             expect(wrapper.find(Main).length).to.equal(1);
@@ -37,7 +37,7 @@ describe('SearchField', () => {
 
         it('should render a Container styled component', () => {
             // Arrange
-            const wrapper = shallow(searchField);
+            const wrapper = mount(searchField);
 
             // Assert
             expect(wrapper.find(Container).length).to.equal(1);
@@ -45,7 +45,7 @@ describe('SearchField', () => {
 
         it('should render an IconContainer styled component', () => {
             // Arrange
-            const wrapper = shallow(searchField);
+            const wrapper = mount(searchField);
 
             // Assert
             expect(wrapper.find(IconContainer).length).to.equal(1);
@@ -53,7 +53,7 @@ describe('SearchField', () => {
 
         it('should render a Search FontAwesome component', () => {
             // Arrange
-            const wrapper = shallow(searchField);
+            const wrapper = mount(searchField);
 
             // Assert
             expect(wrapper.find(Search).length).to.equal(1);
@@ -61,7 +61,7 @@ describe('SearchField', () => {
 
         it('should render an Input styled component', () => {
             // Arrange
-            const wrapper = shallow(searchField);
+            const wrapper = mount(searchField);
 
             // Assert
             expect(wrapper.find(Input).length).to.equal(1);
@@ -72,7 +72,7 @@ describe('SearchField', () => {
         it('should call onChange prop when typed in', () => {
             // Arrange
             const onChange = spy();
-            const wrapper = shallow(
+            const wrapper = mount(
                 <SearchField placeholder="test" onChange={onChange} />
             );
 

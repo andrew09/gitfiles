@@ -5,7 +5,6 @@ import colors from 'utils/colors';
 export const Main = styled.div`
     width: 1200px;
     margin: 0 auto;
-    font-family: 'Montserrat', sans-serif;
 `;
 export const TagsContainer = styled.div`
     width: 800px;

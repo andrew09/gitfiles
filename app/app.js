@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { Map } from 'immutable';
-
 import { UserSearchInput } from 'components/user-search-input';
 import { Profile } from 'components/profile';
 
@@ -12,17 +10,19 @@ export default class App extends React.Component {
         super(props);
 
         this.state = {
-            user: new Map(),
+            userName: '',
         };
     }
 
     render() {
-        const { user } = this.state;
+        const { userName } = this.state;
 
         return (
             <Main>
-                <UserSearchInput onChange={user => this.setState({ user })} />
-                <Profile user={user} />
+                <UserSearchInput
+                    onChange={userName => this.setState({ userName })}
+                />
+                {!!userName && <Profile userName={userName} />}
             </Main>
         );
     }

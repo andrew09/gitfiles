@@ -18,7 +18,6 @@ export default class UserSearchInput extends React.Component {
 
         this.onFieldChange = this.onFieldChange.bind(this);
         this.getUsers = this.getUsers.bind(this);
-        this.userSelected = this.userSelected.bind(this);
     }
 
     componentDidMount() {
@@ -48,14 +47,6 @@ export default class UserSearchInput extends React.Component {
         this.setState({ users: fromJS(users.items) });
     }
 
-    userSelected(userName) {
-        const { users } = this.state;
-        const { onChange } = this.props;
-        const user = users.find(user => user.get('login') === userName);
-
-        if (user) onChange(user);
-    }
-
     getUserTags(getItemProps, inputValue, highlightedIndex) {
         const { users } = this.state;
 
@@ -81,8 +72,10 @@ export default class UserSearchInput extends React.Component {
     }
 
     render() {
+        const { onChange } = this.props;
+
         return (
-            <Downshift onChange={this.userSelected}>
+            <Downshift onChange={onChange}>
                 {({
                     getInputProps,
                     getRootProps,
